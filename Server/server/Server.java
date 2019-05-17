@@ -6,6 +6,7 @@ import java.net.Socket;
 import java.util.HashMap;
 
 import exception.*;
+import log.Logger;
 
 public class Server extends Thread {
 	
@@ -35,9 +36,11 @@ public class Server extends Thread {
 				clientSocket = serverSocket.accept();
 
 				if(!clientSocket.getInetAddress().toString().equals("/127.0.0.1")) {
-					clientsConnected.put(newClientID, new ClientHandler(clientSocket, newClientID));
-					clientsConnected.get(newClientID).start();
-					newClientID++;
+					synchronized (clientSocket) {
+						clientsConnected.put(newClientID, new ClientHandler(clientSocket, newClientID));						
+						clientsConnected.get(newClientID).start();
+						newClientID++;
+					}
 				}
 			} 
 			catch (IOException acceptException) {

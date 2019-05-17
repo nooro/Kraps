@@ -3,7 +3,7 @@ import java.net.Socket;
 import java.util.Scanner;
 
 import exception.BusyPortException;
-import server.Logger;
+import log.Logger;
 import server.Server;
 
 public class Main {

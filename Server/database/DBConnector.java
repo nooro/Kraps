@@ -1,16 +1,16 @@
-package server;
+package database;
 import java.sql.*;
 
 import exception.MissingDBConnectorException;
 import exception.NoDBConnectionException;
 
-public class DBManager {
+public class DBConnector {
 	
 	private Connection connection = null;
 	
-	public DBManager() throws MissingDBConnectorException {
+	public DBConnector() throws MissingDBConnectorException {
 		try {
-			Class.forName("com.mysql.jdbc.Driver");
+			Class.forName("com.mysql.cj.jdbc.Driver");
 		}
 		catch(ClassNotFoundException e) {
 			throw new MissingDBConnectorException();

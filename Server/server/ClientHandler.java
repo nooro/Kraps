@@ -16,7 +16,8 @@ public class ClientHandler extends Thread {
 	
 	private DataInputStream inputStream;
 	private DataOutputStream outputStream;
-	private String input;
+	private String[] input;
+	private String output;
 	private int id;
 	
 	private DBConnector dbConnector;
@@ -46,10 +47,8 @@ public class ClientHandler extends Thread {
 	public void run() {
 		while(!Thread.interrupted()) {
 			try {
-				input = inputStream.readUTF();
-				
-				String[] splittedInput = input.split("/");
-				handleUserQuery(splittedInput);
+				input = inputStream.readUTF().split("/");
+				handleUserQuery(input);
 			} catch (IOException exception) {
 				Logger.log(exception);
 			}
@@ -64,9 +63,17 @@ public class ClientHandler extends Thread {
 		else if(userQuery[0].equals("register")) {
 			//TODO Transfer photo from the client and save it locally.
 			String userDrivingLicensephotoURL = "...";
-			String registrationResponse = db.register(userQuery, userDrivingLicensephotoURL);
+			output = db.register(userQuery, userDrivingLicensephotoURL);
 			try {
-				outputStream.writeUTF(registrationResponse);
+				outputStream.writeUTF(output);
+			} catch (IOException exception) {
+				Logger.log(exception);
+			}
+		}
+		else if(userQuery[0].equals("login")) {
+			output = db.login(userQuery);
+			try {
+				outputStream.writeUTF(output);
 			} catch (IOException exception) {
 				Logger.log(exception);
 			}

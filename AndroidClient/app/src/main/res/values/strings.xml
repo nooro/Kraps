@@ -2,7 +2,8 @@
 
     <string name="app_name">Kraps_Android</string>
 
-    <string name="main_ipAddressHint">Enter server IP address</string>
-    <string name="main_button">Connect</string>
+    <string name="main_etHint">Enter server IP address</string>
+    <string name="main_label">Server address:</string>
+    <string name="main_connect">Connect</string>
 
 </resources>

@@ -10,8 +10,8 @@ import java.net.Socket;
 public class ServerConnector {
     private static String serverIP;
     private static Socket socket = null;
-    private static DataOutputStream output = null;
-    private static DataInputStream input = null;
+    public static DataOutputStream output = null;
+    public static DataInputStream input = null;
 
     public static void connect(String ip) {
         ServerConnector.serverIP = ip;
